@@ -10,7 +10,7 @@ This is a `Cookiecutter`_ template for creating a C++ library project.
     :alt: Travis CI build status
     :target: `travis`_
 
-..  _travis: https://travis-ci.org/mdklatt/cookiecutter-cpp-app
+..  _travis: https://travis-ci.org/mdklatt/cookiecutter-cpp-lib
 ..  _Cookiecutter: http://cookiecutter.readthedocs.org
 
 
@@ -42,10 +42,10 @@ Create a new project directly from the template on `GitHub`_:
 
 ..  code-block::
    
-    $ cookiecutter gh:mdklatt/cookiecutter-cpp-app
+    $ cookiecutter gh:mdklatt/cookiecutter-cpp-lib
 
 
-..  _GitHub: https://github.com/mdklatt/cookiecutter-cpp-app
+..  _GitHub: https://github.com/mdklatt/cookiecutter-cpp-lib
 
 
 Build the project using CMake:
