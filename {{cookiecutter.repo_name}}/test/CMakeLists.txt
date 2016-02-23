@@ -11,4 +11,4 @@ include_directories(${gtest_SOURCE_DIR} ${gtest_SOURCE_DIR}/include)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE})
 
 add_executable(${PROJECT_NAME} GreetingTest.cpp)
-target_link_libraries(${PROJECT_NAME} hello gtest gtest_main)
+target_link_libraries(${PROJECT_NAME} {{ cookiecutter.repo_name }} gtest gtest_main)
