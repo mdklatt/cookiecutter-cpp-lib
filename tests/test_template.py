@@ -33,6 +33,7 @@ def main():
             chdir(tmp)
             yield tmp
         finally:
+            rmtree(tmp)
             chdir(cwd)
         return
 
@@ -40,7 +41,7 @@ def main():
     defaults = load(open(join(template, "cookiecutter.json")))
     with tmpdir():
         cookiecutter(template, no_input=True)
-        chdir(defaults["repo_name"])
+        chdir(defaults["project_name"])
         check_call(split("cmake -DCMAKE_BUILD_TYPE=Debug"))
         check_call(split("cmake --build ."))
         check_call(split(join("build", "Debug", "test_hello")))
