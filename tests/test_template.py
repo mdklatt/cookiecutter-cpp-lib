@@ -44,7 +44,7 @@ def main():
         chdir(defaults["project_name"])
         check_call(split("cmake -DCMAKE_BUILD_TYPE=Debug"))
         check_call(split("cmake --build ."))
-        check_call(split(join("build", "Debug", "test_hello")))
+        check_call(split(join("test", "test_hello")))
     return 0
     
     
