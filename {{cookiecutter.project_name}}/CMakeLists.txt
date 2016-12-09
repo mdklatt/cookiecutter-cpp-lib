@@ -6,8 +6,9 @@
 cmake_minimum_required(VERSION 3.0)
 project({{ cookiecutter.lib_name }})
 
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11 -Wall")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE})
-set(SOURCE_FILES src/Greeting.cpp)
+set(SOURCE_FILES src/Greeting.cpp src/module.cpp)
 include_directories(src)
 add_library(${PROJECT_NAME} ${SOURCE_FILES})
 add_subdirectory(test)
