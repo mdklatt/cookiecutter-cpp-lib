@@ -2,12 +2,12 @@
 ///
 #include "module.hpp"
 
-using namespace {{ cookiecutter.lib_name }};
+using {{ cookiecutter.lib_name }}::SampleClass;
 
 
 int SampleClass::add(int x) const
 {
-    return ::add(num, x);
+    return {{ cookiecutter.lib_name }}::add(num, x);
 }
 
 
