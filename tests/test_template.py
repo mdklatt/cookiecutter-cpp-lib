@@ -18,7 +18,6 @@ from tempfile import mkdtemp
 
 from cookiecutter.main import cookiecutter
 
-from glob import glob
 
 def main():
     """ Execute the test.
