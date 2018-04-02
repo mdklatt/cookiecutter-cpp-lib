@@ -40,7 +40,7 @@ def main():
     defaults = load(open(join(template, "cookiecutter.json")))
     with tmpdir():
         cookiecutter(template, no_input=True)
-        chdir(defaults["project_name"])
+        chdir(defaults["project_slug"])
         check_call(split("cmake -DCMAKE_BUILD_TYPE=Debug"))
         check_call(split("cmake --build ."))
         check_call(split(join("test", "test_hello")))

@@ -1,6 +1,6 @@
 {
-    "project_name": "hello",
-    "lib_name": "{{ cookiecutter.project_name }}",
+    "project_slug": "hello",
+    "lib_name": "{{ cookiecutter.project_slug }}",
     "author_name": "",
     "author_email": "",
     "project_version": "0.1.0.dev0",
