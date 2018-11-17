@@ -5,40 +5,25 @@ test suite are built, and the test suite is executed.
 
 """
 from contextlib import contextmanager
+from cookiecutter.main import cookiecutter
 from json import load
 from os import chdir
-from os import getcwd
 from os.path import abspath
 from os.path import dirname
 from os.path import join
 from shlex import split
-from shutil import rmtree
 from subprocess import check_call
-from tempfile import mkdtemp
-
-from cookiecutter.main import cookiecutter
+from tempfile import TemporaryDirectory
 
 
 def main():
     """ Execute the test.
     
     """
-    @contextmanager
-    def tmpdir():
-        """ Enter a self-deleting temporary directory. """
-        cwd = getcwd()
-        tmp = mkdtemp()
-        try:
-            chdir(tmp)
-            yield tmp
-        finally:
-            rmtree(tmp)
-            chdir(cwd)
-        return
-
     template = dirname(dirname(abspath(__file__)))
     defaults = load(open(join(template, "cookiecutter.json")))
-    with tmpdir():
+    with TemporaryDirectory() as tmpdir:
+        chdir(tmpdir)
         cookiecutter(template, no_input=True)
         chdir(defaults["project_slug"])
         check_call(split("cmake -DCMAKE_BUILD_TYPE=Debug"))

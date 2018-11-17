@@ -6,13 +6,8 @@ with the template engine, so it has access to all template variables.
 """
 from os import renames
 from os.path import join
-from shutil import rmtree
-from tempfile import mkdtemp
-try:
-    from urllib.request import urlopen
-except ImportError:  
-    # Python 2 compatibilty.
-    from urllib2 import urlopen
+from tempfile import TemporaryDirectory
+from urllib.request import urlopen
 from zipfile import ZipFile
 
 
@@ -30,19 +25,16 @@ def get_gtest():
     if release != "master":
         release = "release-{:s}".format(release)
     libroot = join("test", "lib", "gtest")
-    tmproot = mkdtemp()
-    try:
+    with TemporaryDirectory() as tmpdir:
         # Extract the downloaded zip file to a temporary directory. ZipFile
         # requires a stream with a seek() method, so the archive must be
         # downloaded to a local file first.
-        stream = open(join(tmproot, "gtest.zip"), "w+b")
+        stream = open(join(tmpdir, "gtest.zip"), "w+b")
         print(download.format(release))
         stream.write(urlopen(download.format(release)).read())
         archive = ZipFile(stream, mode="r")
-        archive.extractall(tmproot)
-        renames(join(tmproot, "googletest-{:s}".format(release)), libroot)
-    finally:
-        rmtree(tmproot)
+        archive.extractall(tmpdir)
+        renames(join(tmpdir, "googletest-{:s}".format(release)), libroot)
     return
 
 
