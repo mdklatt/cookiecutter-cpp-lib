@@ -1,6 +1,6 @@
 /// Implementation of the sample library module.
 ///
-#include "module.hpp"
+#include "{{ cookiecutter.lib_name }}/module.hpp"
 
 using {{ cookiecutter.lib_name }}::SampleClass;
 

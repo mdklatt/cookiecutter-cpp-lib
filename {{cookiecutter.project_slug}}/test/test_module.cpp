@@ -4,7 +4,7 @@
 /// test runner.
 ///
 #include <gtest/gtest.h>
-#include "module.hpp"
+#include "{{ cookiecutter.lib_name }}/module.hpp"
 
 using namespace {{ cookiecutter.lib_name }};
 

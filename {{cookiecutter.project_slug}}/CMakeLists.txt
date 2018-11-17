@@ -8,11 +8,11 @@ cmake_minimum_required(VERSION 2.8.12)
 project({{ cookiecutter.lib_name }})
 
 set(LIB_FILES
-    ${CMAKE_SOURCE_DIR}/src/module.cpp
+    src/module.cpp
 )
 
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11 -Wall")
-#include_directories(src)
+include_directories(include)
 add_library(${PROJECT_NAME} ${LIB_FILES})
 
 function(install)

@@ -6,7 +6,7 @@ project(test_{{ cookiecutter.lib_name }})
 
 add_subdirectory(lib/gtest)
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_executable(${PROJECT_NAME} test_module.cpp)
 target_link_libraries(${PROJECT_NAME} {{ cookiecutter.lib_name }} gtest gtest_main)
