@@ -30,7 +30,6 @@ def get_googletest():
         # requires a stream with a seek() method, so the archive must be
         # downloaded to a local file first.
         stream = open(join(tmpdir, "googletest.zip"), "w+b")
-        print(download.format(release))
         stream.write(urlopen(download.format(release)).read())
         archive = ZipFile(stream, mode="r")
         archive.extractall(tmpdir)

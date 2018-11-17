@@ -1,21 +1,40 @@
 ## CMake build file for the {{ cookiecutter.lib_name }} library.
 ##
-## This will build the library and its test suite. Compiled binaries will be
-## written to build/${CMAKE_BUILD_TYPE}.
-##
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.8)
 
-project({{ cookiecutter.lib_name }})
+project({{ cookiecutter.lib_name }}
+    VERSION {{ cookiecutter.project_version }}
+    LANGUAGES CXX
+)
 
-set(LIB_FILES
+# Define project targets.
+
+add_library(${PROJECT_NAME}
     src/module.cpp
 )
 
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11 -Wall")
-include_directories(include)
-add_library(${PROJECT_NAME} ${LIB_FILES})
+target_include_directories(${PROJECT_NAME}
+PUBLIC
+    # Interface paths are relative to the installation path, not the current
+    # directory.
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
 
-function(install)
-    # Disable install for test directory.
-endfunction()
+target_compile_features(${PROJECT_NAME}
+PUBLIC
+    cxx_std_11
+)
+
+target_compile_options(${PROJECT_NAME}
+PRIVATE
+    -Wall
+    $<$<CXX_COMPILER_ID:GNU>:-pedantic>
+)
+
+
+# Add subdirectories to build.
+
 add_subdirectory(test)
