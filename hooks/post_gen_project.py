@@ -11,7 +11,7 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 
-def get_gtest():
+def get_googletest():
     """ Download Google Test from GitHub.
     
     Google recommends that each project maintains its own version of this
@@ -24,12 +24,12 @@ def get_gtest():
     print("downloading Google Test ({:s})".format(release))
     if release != "master":
         release = "release-{:s}".format(release)
-    libroot = join("test", "lib", "gtest")
+    libroot = join("test", "vendor", "googletest")
     with TemporaryDirectory() as tmpdir:
         # Extract the downloaded zip file to a temporary directory. ZipFile
         # requires a stream with a seek() method, so the archive must be
         # downloaded to a local file first.
-        stream = open(join(tmpdir, "gtest.zip"), "w+b")
+        stream = open(join(tmpdir, "googletest.zip"), "w+b")
         print(download.format(release))
         stream.write(urlopen(download.format(release)).read())
         archive = ZipFile(stream, mode="r")
@@ -42,7 +42,7 @@ def main():
     """ Execute all tasks. 
     
     """
-    get_gtest()
+    get_googletest()
     return 0
 
 
