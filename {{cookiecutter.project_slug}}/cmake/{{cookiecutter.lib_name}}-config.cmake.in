@@ -1,0 +1,8 @@
+{% set cmake_dir = cookiecutter.lib_name|upper + "_CMAKE_DIR" -%}
+get_filename_component({{ cmake_dir }} "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+if(NOT TARGET @PROJECT_NAME@::@PROJECT_NAME@)
+    include("${% raw %}{{% endraw %}{{ cmake_dir }}{% raw %}}{% endraw %}/@PROJECT_NAME@.cmake")
+endif()
+
+set({{ cookiecutter.lib_name|upper }}_LIBRARIES @PROJECT_NAME@::@PROJECT_NAME@)
