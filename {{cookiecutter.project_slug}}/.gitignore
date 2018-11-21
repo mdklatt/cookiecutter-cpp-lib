@@ -1,6 +1,7 @@
 # Ignore C++ build artifacts.
 
 build/
+*.a
 *.o
 *.so
 *.exe
@@ -16,9 +17,11 @@ build/
 
 .idea/
 .project/
+.vscode/
 nbproject/
 
 
 # Ignore OS metadata files.
 
 .DS_Store
+Thumbs.db
