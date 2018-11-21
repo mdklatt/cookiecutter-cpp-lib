@@ -17,9 +17,10 @@ sudo: true
 dist: trusty  # beta; needed for C++11
 
 before_script:
-  # Install Cookiecutter. Because this is a C++ project Travis does not create
-  # a Python virtualenv, so pip needs to install locally.
-  - pip install --requirement=requirements.txt --user
+  # Install Cookiecutter. Because this is a C++ project a Python virtualenv
+  # environment needs to be created manually.
+  - pyenv local 3.6
+  - python -m pip install --requirement=requirements.txt
   
 script:
   - python tests/test_template.py
