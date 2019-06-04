@@ -1,5 +1,5 @@
 {
-    "project_slug": "hello",
+    "project_slug": "cpplib",
     "lib_name": "{{ cookiecutter.project_slug }}",
     "author_name": "",
     "author_email": "",
