@@ -19,6 +19,7 @@ build/
 .project/
 .vscode/
 nbproject/
+*.code-workspace
 
 
 # Ignore OS metadata files.
