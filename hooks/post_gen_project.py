@@ -6,6 +6,7 @@ with the template engine, so it has access to all template variables.
 """
 from os import renames
 from os.path import join
+from pathlib import Path
 from tempfile import TemporaryDirectory
 from urllib.request import urlopen
 from zipfile import ZipFile
@@ -19,25 +20,26 @@ def get_googletest():
     violations of the One-Definition Rule.
     
     """
-    download = "https://github.com/google/googletest/archive/{:s}.zip"
     release = "{{ cookiecutter.googletest_release }}"
-    print("downloading Google Test ({:s})".format(release))
+    download = f"https://github.com/google/googletest/archive/{release:s}.zip"
+    print(f"downloading Google Test ({release:s})")
     if release != "master":
-        release = "release-{:s}".format(release)
-    libroot = join("test", "vendor", "googletest")
+        release = f"release-{release:s}"
+    libroot =  Path("test", "vendor", "googletest")
+    libroot.mkdir(parents=True, exist_ok=True)
     with TemporaryDirectory() as tmpdir:
         # Extract the downloaded zip file to a temporary directory. ZipFile
         # requires a stream with a seek() method, so the archive must be
         # downloaded to a local file first.
-        stream = open(join(tmpdir, "googletest.zip"), "w+b")
-        stream.write(urlopen(download.format(release)).read())
-        archive = ZipFile(stream, mode="r")
+        file = Path(tmpdir, "googletest.zip")
+        file.write_bytes(urlopen(download).read())
+        archive = ZipFile(file.open("r+b"), mode="r")
         archive.extractall(tmpdir)
-        renames(join(tmpdir, "googletest-{:s}".format(release)), libroot)
+        Path(tmpdir, f"googletest-{release:s}").replace(libroot)
     return
 
 
-def main():
+def main() -> int:
     """ Execute all tasks. 
     
     """
