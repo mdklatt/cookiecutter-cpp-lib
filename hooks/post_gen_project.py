@@ -4,8 +4,6 @@ This is executed in the new project directory. Before execution it is rendered
 with the template engine, so it has access to all template variables.
 
 """
-from os import renames
-from os.path import join
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from urllib.request import urlopen
