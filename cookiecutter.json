@@ -1,9 +1,11 @@
 {
-    "project_slug": "cpplib",
-    "lib_name": "{{ cookiecutter.project_slug }}",
+    "lib_name": "cpplib",
+    "project_slug": "{{ cookiecutter.lib_name }}",
     "author_name": "",
     "author_email": "",
     "project_version": "0.1.0.0",
-    "googletest_release": "master",
+    "cmake_version": "3.16",
+    "googletest_version": "v1.13.0",
+    "cpp_standard": "17",
     "sphinx_theme": "alabaster"
 }

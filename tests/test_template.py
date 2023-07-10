@@ -21,11 +21,11 @@ def main() -> int:
     defaults = loads(template.joinpath("cookiecutter.json").read_text())
     with TemporaryDirectory() as tmpdir:
         cookiecutter(str(template), no_input=True, output_dir=tmpdir)
-        name = defaults["project_slug"]
+        name = defaults["lib_name"]
         cwd = Path(tmpdir) / name
         for opts in "-DCMAKE_BUILD_TYPE=Debug", "--build":
             check_call(split(f"cmake {opts:s} ."), cwd=cwd)
-        check_call(split(f"test/test_{name:s}"), cwd=cwd)
+        check_call(split(f"tests/unit/test_{name:s}"), cwd=cwd)
     return 0
     
     

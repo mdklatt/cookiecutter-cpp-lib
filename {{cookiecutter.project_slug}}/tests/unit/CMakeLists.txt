@@ -1,0 +1,28 @@
+# Get dependencies.
+
+include(FetchContent)
+include(GoogleTest)
+
+FetchContent_Declare(googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG {{ cookiecutter.googletest_version }}
+)
+FetchContent_MakeAvailable(googletest)
+
+
+# Define targets.
+
+add_executable(test_${name}
+    test_module.cpp
+)
+target_link_libraries(test_${name}
+PRIVATE
+    ${name}
+    gtest
+    gtest_main
+)
+
+
+# Add tests to CTest suite.
+
+gtest_discover_tests(test_${name} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
