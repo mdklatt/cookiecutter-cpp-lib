@@ -27,4 +27,4 @@ jobs:
           cmake-version: "3.16"
       - name: Run tests
         run: |
-          python tests/test_template.py
+          python -m pytest tests/

@@ -16,4 +16,4 @@ dev: $(VENV)/.make-update
 
 .PHONY: test
 test: dev
-	@$(PYTHON) tests/test_template.py && echo "All tests passed"
+	@$(PYTEST) tests/ && echo "All tests passed"
