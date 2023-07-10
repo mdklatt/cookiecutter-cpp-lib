@@ -1,66 +1,72 @@
-C++ Library Project Template
-============================
+################################
+C++ Application Project Template
+################################
 
-Overview |travis.png|
----------------------
-
-This is a `Cookiecutter`_ template for creating a C++ library project.
-
-..  |travis.png| image:: https://travis-ci.org/mdklatt/cookiecutter-cpp-lib.png?branch=master
-    :alt: Travis CI build status
-    :target: `travis`_
-
-..  _travis: https://travis-ci.org/mdklatt/cookiecutter-cpp-lib
-..  _Cookiecutter: http://cookiecutter.readthedocs.org
+|c++17|
+|cmake|
+|license|
+|tests|
 
 
-Template Project Features
--------------------------
-
-* `CMake`_ builds
-* `Google Test`_ tests
-* `Sphinx`_ documentation
-* `MIT License`_
-
-..  _Cmake: https://cmake.org 
-..  _Google Test: https://github.com/google/googletest
-..  _Sphinx: http://sphinx-doc.org
-..  _MIT License: http://choosealicense.com/licenses/mit
+This is a `Cookiecutter`_ template for creating a C++ application project that
+uses modern CMake practices (*e.g.*  `It's Time To Do CMake Right`_).
 
 
+**Project features**:
+
+- C++17
+- `CMake`_ builds
+- `Google Test`_ test suite
+- `Doxygen`_ documentation
+- `MIT License`_
+
+
+=====
 Usage
------
+=====
 
 Install Python requirements for using the template:
 
-..  code-block::
+.. code-block::
 
-    $ pip install --requirement=requirements.txt --user 
+    $ python -m pip install -r requirements.txt
 
 
 Create a new project directly from the template on `GitHub`_:
 
-..  code-block::
-   
+.. code-block::
+
     $ cookiecutter gh:mdklatt/cookiecutter-cpp-lib
 
 
-..  _GitHub: https://github.com/mdklatt/cookiecutter-cpp-lib
+===========
+Development
+===========
+
+Create a local development environment and run template tests:
+
+.. code-block::
+
+    $ make dev test
 
 
-Build the project using CMake:
+.. |c++17| image:: https://img.shields.io/static/v1?label=c%2B%2B&message=17&color=informational
+   :alt: C++17
+.. |cmake| image:: https://img.shields.io/static/v1?label=cmake&message=3.16&color=informational
+   :alt: CMake 3.16
+.. |license| image:: https://img.shields.io/github/license/mdklatt/cookiecutter-cpp-lib
+   :alt: MIT License
+   :target: `MIT License`_
+.. |tests| image:: https://github.com/mdklatt/cookiecutter-cpp-lib/actions/workflows/test.yml/badge.svg
+   :alt: CI Test
+   :target: `GitHub Actions`_
 
-..  code-block::
-
-    $ mkdir -p build/Debug && cd build/Debug
-    $ cmake -DCMAKE_BUILD_TYPE=Debug ../../
-    $ make
-    
-    
-Generate Sphinx documenation.
-
-..  code-block::
-
-    $ pip install --requirement=requirements-doc.txt --user
-    $ cd doc
-    $ make html
+.. _CMake: https://cmake.org
+.. _Cookiecutter: http://cookiecutter.readthedocs.org
+.. _Doxygen: http://www.stack.nl/~dimitri/doxygen
+.. _Google Test: https://github.com/google/googletest
+.. _GitHub: https://github.com/mdklatt/cookiecutter-cpp-lib
+.. _GitHub Actions: https://github.com/mdklatt/cookiecutter-cpp-lib/actions/workflows/test.yml
+.. _It's Time To Do CMake Right: https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/
+.. _MIT License: http://choosealicense.com/licenses/mit
+.. _TOML: https://toml.io/en/
