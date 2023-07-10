@@ -14,6 +14,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory(src)
 
+include(GNUInstallDirs)
+
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+
 # Including CTest here at the project root makes `ctest` runnable from the
 # build root. This is also necessary for CLion to generate a CTest Run
 # Configuration.
