@@ -28,5 +28,5 @@ if(BUILD_TESTING)  # defined by CTest module
 endif()
 
 if(BUILD_DOCS)
-    add_subdirectory(doc)
+    add_subdirectory(docs)
 endif()
