@@ -63,7 +63,7 @@ def test_project(project):
 
     """
     # Just a basic sanity test.
-    assert len(list(project.iterdir())) == 10
+    assert len(list(project.iterdir())) == 11
     return
 
 

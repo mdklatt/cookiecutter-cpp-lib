@@ -21,7 +21,7 @@ PRIVATE
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(
-    ${CMAKE_SOURCE_DIR}/cmake/{{ cookiecutter.lib_name }}-config.cmake.in
+    ${PROJECT_SOURCE_DIR}/cmake/{{ cookiecutter.lib_name }}-config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/{{ cookiecutter.lib_name }}-config.cmake
 INSTALL_DESTINATION
     ${CMAKE_INSTALL_LIBDIR}/cmake/{{ cookiecutter.lib_name }}

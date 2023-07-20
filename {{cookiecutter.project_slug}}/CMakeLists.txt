@@ -24,7 +24,7 @@ install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 # Configuration.
 include(CTest)
 if(BUILD_TESTING)  # defined by CTest module
-    add_subdirectory(tests/unit)
+    add_subdirectory(tests)
 endif()
 
 if(BUILD_DOCS)

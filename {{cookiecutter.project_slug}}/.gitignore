@@ -8,9 +8,15 @@ build/
 *.dll
 
 
-# Ignore Vagrant runtime files.
+# Ignore Python environments.
 
-.vagrant/
+.python-version
+.venv*/
+
+
+# Ignore Make artifacts.
+
+**/.make-update
 
 
 # Ignore settings for various IDEs.
