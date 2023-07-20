@@ -1,47 +1,14 @@
-""" Test driver for CMake integration tests.
+""" Integration tests.
 
 This will verify that the library is usable by another CMake project as an
 external build tree or an installed library.
 
 """
-from argparse import ArgumentParser
+import pytest
 from pathlib import Path
-from subprocess import Popen, PIPE, STDOUT, check_call
+from subprocess import Popen, PIPE, run, STDOUT
 from sys import stdout
-from tempfile import TemporaryDirectory
-
-
-def main() -> int:
-    """ Build the C++ test application and execute it.
-
-    :return: exit status (0 on success)
-    """
-    parser = ArgumentParser()
-    parser.add_argument("type", help="test type")
-    parser.add_argument("root", help="project root directory", nargs="?", default=Path.cwd())
-    args = parser.parse_args()
-    with TemporaryDirectory() as test_dir:
-        test_dir = Path(test_dir)
-        defines = {
-            "CMAKE_BUILD_TYPE": "Release",
-        }
-        build_dir = test_dir / "build"
-        install_dir = test_dir / "usr/local"
-        if args.type.lower() == "source":
-            # Test source tree build.
-            defines["LIBRARY_SOURCE_DIR"] = args.root
-        elif args.type.lower() == "install":
-            # Test installed library.
-            source_dir = Path(args.root)
-            defines["CMAKE_PREFIX_PATH"] = install_dir
-            defines["CMAKE_INSTALL_PREFIX"] = install_dir
-            _build(source_dir, build_dir / "lib", defines, "install")
-        else:
-            raise ValueError(f"unknown test type: {args.type}")
-        local_dir = Path(__file__).parent / "libtest"
-        _build(local_dir, build_dir, defines)
-        check_call([str(build_dir / "libtest")])
-    return 0
+from shlex import split
 
 
 def _build(source: Path, build: Path, defs: dict, target=None):
@@ -74,5 +41,67 @@ def _build(source: Path, build: Path, defs: dict, target=None):
     return
 
 
+@pytest.fixture
+def build_dir(tmp_path) -> Path:
+    """ Return a temporary build directory.
+
+    :return: build directory path
+    """
+    return tmp_path / "build"
+
+
+@pytest.fixture
+def install(tmp_path, build_dir) -> dict:
+    """ Configure the build to use an installed library.
+
+    :return: CMake definitions
+    """
+    source_dir = Path.cwd()
+    install_dir = tmp_path / "usr/local"
+    defs = {
+        "BUILD_TESTING": "OFF",
+        "CMAKE_PREFIX_PATH": install_dir,
+        "CMAKE_INSTALL_PREFIX": install_dir,
+    }
+    _build(source_dir, build_dir / "lib", defs, "install")
+    return defs
+
+
+@pytest.fixture
+def source() -> dict:
+    """ Configure the build to the library source tree.
+
+    :return: CMake definitions
+    """
+    return {
+        "BUILD_TESTING": "OFF",
+        "LIBRARY_SOURCE_DIR": Path.cwd(),
+    }
+
+
+@pytest.fixture(params=("install", "source"))
+def app(request, build_dir) -> Path:
+    """ Build the C++ test application.
+
+    :return: application path
+    """
+    defs = request.getfixturevalue(request.param)
+    defs |= {"CMAKE_BUILD_TYPE": "Release"}
+    local_dir = Path(__file__).parent / "libtest"
+    _build(local_dir, build_dir, defs)
+    return build_dir / "libtest"
+
+
+def test_lib(app):
+    """ Test the library as part of an application.
+
+    """
+    process = run(split(str(app)), capture_output=True)
+    assert process.returncode == 0
+    return
+
+
+# Make the script executable.
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(pytest.main([__file__]))
