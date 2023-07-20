@@ -8,7 +8,7 @@ C++ Application Project Template
 |tests|
 
 
-This is a `Cookiecutter`_ template for creating a C++ application project that
+This is a `Cookiecutter`_ template for creating a C++ library project that
 uses modern CMake practices (*e.g.*  `It's Time To Do CMake Right`_).
 
 
