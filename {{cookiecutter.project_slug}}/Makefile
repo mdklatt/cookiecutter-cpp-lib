@@ -26,7 +26,7 @@ build:
 .PHONY: test
 test: build
 	. $(VENV)/bin/activate
-	cd $(BUILD_ROOT) && ctest
+	cd $(BUILD_ROOT) && ctest --output-on-failure
 
 
 .PHONY: docs
