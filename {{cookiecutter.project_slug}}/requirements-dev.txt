@@ -1,2 +1,2 @@
 # Development requirements.
-pytest>=7.3.2,<8
+pytest>=7.3.2,<9
